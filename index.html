@@ -265,23 +265,42 @@
 
         /* RESPONSIVE */
         @media (max-width: 1100px) {
-            .app-container {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto 400px auto;
-                padding: 10px;
+            body {
                 overflow-y: auto;
                 height: auto;
-                display: block;
+            }
+
+            .app-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                padding: 10px;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .col-left,
+            .col-right {
+                order: 2;
+                overflow: visible;
+                height: auto;
+                padding: 0;
             }
 
             .col-center {
-                height: 400px;
-                margin: 20px 0;
+                order: 1;
+                height: 50vh;
+                margin: 5px 0;
+                min-height: 350px;
             }
 
             canvas#spiral-3d {
-                position: relative;
-                height: 400px;
+                height: 100%;
+            }
+
+            :root {
+                --pad-outer: 15px;
             }
         }
     </style>
@@ -404,6 +423,22 @@
                 <div class="card-h"><span>ЖУРНАЛ ПОДІЙ (7D BUFFER)</span></div>
                 <div class="log-box" id="sys-log">
                     <!-- Logs -->
+                </div>
+
+                <div
+                    style="margin-top:15px; padding-top:10px; border-top:1px solid #112; font-size:8px; color:#446; line-height:1.4; font-family:var(--font-ui);">
+                    <div style="color:var(--accent-sec); margin-bottom:4px; font-weight:bold; letter-spacing:1px;">
+                        ПРИНЦИПИ ОБЧИСЛЕННЯ (GSI-26)</div>
+                    Ядро IBONARIUM базується на тримодульній агрегації сигналів для оцінки СУБ'ЄКТИВНОЇ
+                    РЕАЛЬНОСТІ:<br><br>
+                    <b style="color:#668;">MOD 1 (ГЕОПОЛІТИКА):</b> Моделювання стабільності центрів сили та зон тертя
+                    на основі фінансової волатильності та структурних ризиків.<br>
+                    <b style="color:#668;">MOD 2 (СОЦІУМ):</b> Текстуальний аналіз світових новин (RSS) для визначення
+                    настрою "Планетарної Ноосфери" через щільність ключових слів.<br>
+                    <b style="color:#668;">MOD 3 (БІОСФЕРА):</b> Пряма інтеграція фізичних параметрів Землі —
+                    геомагнітна активність (KP-index NOAA) та сейсмічна напруга (USGS).<br><br>
+                    Сукупний індекс відображає не об'єктивний час, а інтенсивність "подійного потоку", що формує наше
+                    колективне сприйняття реальності.
                 </div>
             </div>
 
@@ -578,9 +613,34 @@
             }
         };
 
+        // MODULE 3: BIOSPHERE (Planetary Physics)
+        const BIOS_PARSER = {
+            data: { kp: 2, quakes: 0, solar_flux: 0 },
+            async scan() {
+                try {
+                    // Fetch KP Index (Space Weather Tension)
+                    const kpRes = await fetch('https://services.swpc.noaa.gov/products/noaa-scales.json');
+                    const kpData = await kpRes.json();
+                    const kpVal = parseInt(kpData['0'].G.metric) || 1; // Simplistic proxy
+
+                    // Fetch Earthquakes (Global Physical Tension - last 1h)
+                    const qRes = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+                    const qData = await qRes.json();
+                    const quakeCount = qData.metadata.count;
+
+                    this.data.kp = kpVal;
+                    this.data.quakes = quakeCount;
+                    return { kp: kpVal, quakes: quakeCount };
+                } catch (e) {
+                    console.warn("Biosphere Scan Offline, using base values.");
+                    return { kp: 2, quakes: 5 };
+                }
+            }
+        };
+
         async function fetchLiveData() {
-            document.getElementById('update-tick').innerText = "СОЦІАЛЬНА СИНХРОНІЗАЦІЯ...";
-            document.getElementById('calc-bar').style.width = "60%";
+            document.getElementById('update-tick').innerText = "ПЛАНЕТАРНА СИНХРОНІЗАЦІЯ...";
+            document.getElementById('calc-bar').style.width = "40%";
 
             try {
                 // 1. FINANCIAL TRIGGER
@@ -594,6 +654,7 @@
                 } catch (e) { volatilityIndex = 2.5; }
                 // 2. RUN MODULES
                 const socialScore = await SOCIAL_PARSER.scan(); // Real News Sentiment
+                const bioSignals = await BIOS_PARSER.scan(); // Real Planetary Physics
                 const geoEntropy = GEO_PARSER.tick(volatilityIndex); // Sim Geopolitics
 
                 // 3. REGIONAL FUSION: GRANULAR CONTINENTAL MODEL
@@ -652,8 +713,9 @@
                 });
 
                 // 4. PLANETARY INDICES: BIOS & TECH
-                // Biosphere Resilience: Inverse to conflict/unrest + solar cycle proxy
-                const biosRes = 90 - (GEO_PARSER.data.unrest * 0.1) - (GEO_PARSER.data.conflict * 0.05) + (Math.random() * 5);
+                // Biosphere Resilience: Real Space Weather (KP) + Earth Tension (Quakes) + Social Context
+                // High KP Index and high Earthquake count reduce Biosphere Resilience
+                const biosRes = 95 - (bioSignals.kp * 4) - (clamp(bioSignals.quakes, 0, 20) * 0.5) - (GEO_PARSER.data.unrest * 0.05);
                 // Technospheric Pressure: Network traffic + Cyber activity + News saturation
                 const techPress = (GEO_PARSER.data.network * 0.3) + (GEO_PARSER.data.cyber * 0.2) + (volatilityIndex * 2);
 
@@ -731,7 +793,10 @@
             document.getElementById('main-desc').innerHTML = `<span style="color:#fff; font-weight:bold">${mood}</span> // ${desc}`;
             document.getElementById('main-idx').style.color = idx > 60 ? '#fff' : '#f04';
 
-            if (Math.random() > 0.7) log(`Скан Соціуму: ${STATE.global.noosphere}/100`);
+            if (Math.random() > 0.7) {
+                log(`Біо-сигнали: KP=${BIOS_PARSER.data.kp}, Quakes=${BIOS_PARSER.data.quakes}`);
+                log(`Скан Соціуму: ${STATE.global.noosphere}/100`);
+            }
 
             const histVals = STATE.history.map(x => x.val);
             const avg = histVals.reduce((a, b) => a + b, 0) / histVals.length;
