@@ -307,23 +307,23 @@
         <div class="col-left">
             <div class="card">
                 <div class="card-h">
-                    <span>PLANETARY SENSORY INPUTS</span>
-                    <span id="update-tick">LIVE</span>
+                    <span>СЕНСОРИ ПЛАНЕТАРНОГО СТАНУ</span>
+                    <span id="update-tick">ОНЛАЙН</span>
                 </div>
-                <div class="m-row"><span class="m-lbl">DIGITAL PULSE (NET)</span> <span class="m-val"
+                <div class="m-row"><span class="m-lbl">ЦИФРОВИЙ ПУЛЬС (NET)</span> <span class="m-val"
                         id="v-net">---</span><span class="m-unit">Tbps</span></div>
-                <div class="m-row"><span class="m-lbl">ECONOMIC ANXIETY</span> <span class="m-val"
+                <div class="m-row"><span class="m-lbl">ЕКОНОМІЧНА ТРИВОГА</span> <span class="m-val"
                         id="v-vol">---</span><span class="m-unit">idx</span></div>
-                <div class="m-row"><span class="m-lbl">BIOSPHERE TENSION</span> <span class="m-val"
-                        id="v-sol">---</span><span class="m-unit">psi</span></div>
-                <div class="m-row"><span class="m-lbl">SOCIAL COHERENCE</span> <span class="m-val"
+                <div class="m-row"><span class="m-lbl">СОЦІАЛЬНА КОГЕРЕНТНІСТЬ</span> <span class="m-val"
                         id="v-noo">---</span><span class="m-unit">%</span></div>
+                <div class="m-row"><span class="m-lbl">ЩІЛЬНІСТЬ ЧАСУ</span> <span class="m-val"
+                        id="v-dens">---</span><span class="m-unit">μ/s</span></div>
             </div>
 
             <div class="card" style="flex:1">
                 <div class="card-h">
-                    <span>GEOPOLITICAL ZONES</span>
-                    <span>STABILITY</span>
+                    <span>ГЕОПОЛІТИЧНІ ЗОНИ</span>
+                    <span>СТАБІЛЬНІСТЬ</span>
                 </div>
                 <div class="zone-grid" id="zones-list">
                     <!-- JS Injected -->
@@ -336,26 +336,27 @@
             <canvas id="spiral-3d"></canvas>
 
             <div class="center-hud">
-                <div class="idx-lbl">SUBJECTIVE INDEX</div>
+                <div class="idx-lbl">ГЛОБАЛЬНИЙ СУБ'ЄКТИВНИЙ ІНДЕКС</div>
                 <div class="big-idx" id="main-idx">--</div>
-                <div style="font-size:10px; color:#aaa; margin-top:5px; max-width:200px;" id="main-desc">
-                    INITIALIZING CHRONOS FIELD...
+                <div style="font-size:10px; color:#aaa; margin-top:5px; max-width:240px; min-height:40px;"
+                    id="main-desc">
+                    ІНІЦІАЛІЗАЦІЯ ПОЛЯ ХРОНОСУ...
                 </div>
             </div>
 
             <!-- Legend Overlay -->
             <div style="position:absolute; top:20px; right:20px; text-align:right;">
-                <div style="font-size:9px; color:#88a;">SPIRAL DEPTH: 7 DAYS</div>
-                <div style="font-size:9px; color:#556;">Z-AXIS: TIME DECAY</div>
+                <div style="font-size:9px; color:#88a;">ГЛИБИНА СПІРАЛІ: 7 ДНІВ</div>
+                <div style="font-size:9px; color:#556;">Z-Вісь: РОЗПАД ЧАСУ</div>
                 <div style="margin-top:5px;">
                     <span
                         style="display:inline-block; width:8px; height:8px; background:#0fa; margin-right:4px;"></span>
-                    <span style="font-size:9px; color:#fff;">OPTIMAL</span>
+                    <span style="font-size:9px; color:#fff;">ОПТИМАЛЬНО</span>
                 </div>
                 <div>
                     <span
                         style="display:inline-block; width:8px; height:8px; background:#f04; margin-right:4px;"></span>
-                    <span style="font-size:9px; color:#fff;">CRITICAL</span>
+                    <span style="font-size:9px; color:#fff;">КРИТИЧНО</span>
                 </div>
             </div>
         </div>
@@ -364,22 +365,31 @@
         <div class="col-right">
 
             <div class="card">
-                <div class="card-h"><span>COMPUTATIONAL METRICS</span></div>
-                <div class="m-row"><span class="m-lbl">AVG DAY SCORE</span> <span class="m-val" id="m-avg">--</span>
+                <div class="card-h"><span>ОБЧИСЛЮВАЛЬНІ МЕТРИКИ</span></div>
+                <div class="meta-row">
+                    <div class="meta-item">
+                        <span class="lbl">СЕРЕДНЄ (24г)</span>
+                        <span class="val" id="m-avg">--</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="lbl">ПІК ЕНТРОПІЇ</span>
+                        <span class="val" id="m-peak">--:--</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="lbl">РОЗРИВ РЕАЛЬНОСТІ</span>
+                        <span class="val" id="m-bio">--</span>
+                    </div>
                 </div>
-                <div class="m-row"><span class="m-lbl">PEAK ANXIETY</span> <span class="m-val" id="m-peak">--:--</span>
+                <div class="logs">
+                    <div class="log-entry"><span class="log-time">[SYSTEM]</span> Ініціалізація суб'єктивного ядра...
+                    </div>
                 </div>
-                <div class="m-row"><span class="m-lbl">BIOSYNC EFFICIENCY</span> <span class="m-val"
-                        id="m-bio">--</span><span class="m-unit">%</span></div>
-                <div class="m-row"><span class="m-lbl">LUNAR PHASE</span> <span class="m-val" id="m-moon">--</span><span
-                        class="m-unit">%</span></div>
             </div>
 
             <div class="card">
-                <div class="card-h"><span>SYSTEM ANALYSIS</span></div>
+                <div class="card-h"><span>АНАЛІЗ СИСТЕМИ</span></div>
                 <div style="font-size:10px; color:#cdf; line-height:1.5; margin-bottom:10px;" id="sys-analysis-text">
-                    Calculating multi-variable correlation between global temperature anomalies and subjective digital
-                    sentiment...
+                    Розрахунок багатофакторної кореляції між глобальними аномаліями та суб'єктивним цифровим настроєм...
                 </div>
                 <div style="height:4px; width:100%; background:#112;">
                     <div style="height:100%; width:0%; background:#80f; transition:width 1s;" id="calc-bar"></div>
@@ -387,7 +397,7 @@
             </div>
 
             <div class="card" style="flex:1; display:flex; flex-direction:column;">
-                <div class="card-h"><span>EVENT LOG (7D BUFFER)</span></div>
+                <div class="card-h"><span>ЖУРНАЛ ПОДІЙ (7D BUFFER)</span></div>
                 <div class="log-box" id="sys-log">
                     <!-- Logs -->
                 </div>
@@ -403,13 +413,17 @@
         // ============================================================================
 
         const ZONES_CFG = [
-            { id: 'atl', name: 'NORTH ATLANTIC', lat: 40.7, lon: -74.0 }, // US/EU Bridge
-            { id: 'pac', name: 'PACIFIC RIM', lat: 35.6, lon: 139.6 },    // Asia/Tech
-            { id: 'eus', name: 'EURASIA CORE', lat: 55.7, lon: 37.6 },    // Continental
-            { id: 'sth', name: 'GLOBAL SOUTH', lat: -23.5, lon: -46.6 },  // LatAm/Stability
-            { id: 'afr', name: 'AFRICA CRADLE', lat: 30.0, lon: 31.2 },   // Growth
-            { id: 'ind', name: 'INDOSPHERE', lat: 19.0, lon: 72.8 },      // Density
-            { id: 'pol', name: 'POLAR BASE', lat: -77.8, lon: 166.6 }     // Climate Baseline
+            { id: 'nam', name: 'ПІВНІЧНА АМЕРИКА (США/КАН)', lat: 45.0, lon: -100.0 },
+            { id: 'lat', name: 'ЛАТИНСЬКА АМЕРИКА', lat: -15.0, lon: -60.0 },
+            { id: 'euw', name: 'ЗАХІДНА ЄВРОПА (ЄС)', lat: 48.0, lon: 10.0 },
+            { id: 'eue', name: 'СХІДНА ЄВРОПА (БУФЕР)', lat: 50.0, lon: 30.0 },
+            { id: 'rus', name: 'ЦЕНТРАЛЬНА ЄВРАЗІЯ (РФ)', lat: 55.0, lon: 80.0 },
+            { id: 'mea', name: 'БЛИЗЬКИЙ СХІД / GULF', lat: 25.0, lon: 45.0 },
+            { id: 'afr', name: 'СУБСАХАРСЬКА АФРИКА', lat: 0.0, lon: 20.0 },
+            { id: 'chn', name: 'СХІДНА АЗІЯ (КНР)', lat: 35.0, lon: 110.0 },
+            { id: 'ind', name: 'ПІВДЕННА АЗІЯ (ІНДІЯ)', lat: 20.0, lon: 77.0 },
+            { id: 'sea', name: 'ПІВДЕННО-СХІДНА АЗІЯ', lat: 10.0, lon: 110.0 },
+            { id: 'aus', name: 'ОКЕАНІЯ / АВСТРАЛІЯ', lat: -25.0, lon: 135.0 }
         ];
 
         // 7 Days * 24 Hours * 6 points per hour (10 min res) = 1008 points
@@ -559,7 +573,7 @@
         };
 
         async function fetchLiveData() {
-            document.getElementById('update-tick').innerText = "SOCIAL SYNC...";
+            document.getElementById('update-tick').innerText = "СОЦІАЛЬНА СИНХРОНІЗАЦІЯ...";
             document.getElementById('calc-bar').style.width = "60%";
 
             try {
@@ -572,61 +586,81 @@
                     btcChg = cData.bitcoin.usd_24h_change;
                     volatilityIndex = Math.abs(btcChg);
                 } catch (e) { volatilityIndex = 2.5; }
-
                 // 2. RUN MODULES
                 const socialScore = await SOCIAL_PARSER.scan(); // Real News Sentiment
                 const geoEntropy = GEO_PARSER.tick(volatilityIndex); // Sim Geopolitics
 
-                // 3. REGIONAL FUSION
+                // 3. REGIONAL FUSION: GRANULAR CONTINENTAL MODEL
                 let sumStability = 0;
+                const friction = (GEO_PARSER.data.conflict / 100);
 
                 ZONES_CFG.forEach(z => {
                     let stab = 0;
 
-                    // Base: Geo Logic
-                    if (z.id === 'atl' || z.id === 'eus') stab = 100 - (GEO_PARSER.data.conflict / 500 * 100);
-                    else if (z.id === 'pac') stab = 100 - GEO_PARSER.data.supply_tension;
-                    else stab = 85;
+                    // Specialized Stress Mapping for Granular Zones
+                    if (z.id === 'nam' || z.id === 'euw') {
+                        // Western Core: Propaganda + Volatility
+                        stab = 95 - (volatilityIndex * 2.5) - (GEO_PARSER.data.propaganda * 0.15);
+                    } else if (z.id === 'rus' || z.id === 'eue' || z.id === 'mea') {
+                        // Friction Zones: Conflict Sensitive
+                        stab = 85 - (GEO_PARSER.data.conflict / 4);
+                    } else if (z.id === 'chn' || z.id === 'sea') {
+                        // Production Hubs: Supply Tension + Network Integration
+                        stab = 98 - GEO_PARSER.data.supply_tension - (100 - GEO_PARSER.data.network) * 0.5;
+                    } else if (z.id === 'lat' || z.id === 'afr' || z.id === 'ind') {
+                        // Growth/Developing: Unrest + Social Gravity
+                        stab = 88 - (GEO_PARSER.data.unrest / 5) - (volatilityIndex * 1.2);
+                    } else if (z.id === 'aus') {
+                        // Global Buffer: Volatility Baseline
+                        stab = 92 - (volatilityIndex * 0.8);
+                    }
 
-                    // Modifier: SOCIAL SENTIMENT overlay
-                    // If social score is low (<50), it erodes regional stability everywhere
-                    // If high (>50), it buffers/boosts stability
-                    const socialImpact = (socialScore - 50) * 0.5; // +/- 20 pts max
-
+                    // Global Social Sentiment Impact
+                    const socialImpact = (socialScore - 50) * 0.35;
                     stab += socialImpact;
-                    stab -= volatilityIndex * 2; // Market fear always hurts
 
-                    stab = clamp(stab, 10, 100);
+                    stab = clamp(stab, 5, 100);
 
                     STATE.zones[z.id] = { sc: stab };
                     sumStability += stab;
 
-                    // UI
+                    // UI Update
                     const elVal = document.getElementById(`zval-${z.id}`);
                     const elT = document.getElementById(`zt-${z.id}`);
                     const elD = document.getElementById(`zdet-${z.id}`);
 
                     if (elVal) {
                         elVal.innerText = stab.toFixed(0);
-                        let color = stab < 45 ? "#f04" : stab < 65 ? "#fa0" : "#0fa";
+                        let color = stab < 40 ? "#f04" : stab < 65 ? "#fa0" : "#0fa";
                         elVal.style.color = color;
-                        if (elT) { elT.innerText = stab < 50 ? "ANXIOUS" : "CALM"; elT.style.color = color; }
-                        if (elD) elD.innerText = `SOC:${socialScore.toFixed(0)}`;
+                        let statusTxt = stab < 35 ? "ДЕСТАБІЛІЗАЦІЯ" : stab < 60 ? "НАПРУЖЕННЯ" : "БАЛАНС";
+                        if (elT) { elT.innerText = statusTxt; elT.style.color = color; }
+
+                        // Detail Trace
+                        if (elD) {
+                            if (z.id === 'chn' || z.id === 'sea') elD.innerText = `SUP:${GEO_PARSER.data.supply_tension.toFixed(0)}`;
+                            else if (z.id === 'rus' || z.id === 'mea') elD.innerText = `CFL:${GEO_PARSER.data.conflict}`;
+                            else elD.innerText = `GSI:${(stab / 10).toFixed(1)}`;
+                        }
                     }
                 });
 
-                // 4. GLOBAL SUBJECTIVE INDEX
+                // 4. GLOBAL SUBJECTIVE INDEX (Aggregated from 11-Zone Matrix)
                 const avgRegionStab = sumStability / ZONES_CFG.length;
 
-                // Formula: Region Avg (Structure) + Social Score (Mood) - Geo Entropy (Risk)
-                // Weighted average
-                let finalIdx = (avgRegionStab * 0.4) + (socialScore * 0.4) - (geoEntropy * 1.0);
+                let finalIdx = (avgRegionStab * 0.5) + (socialScore * 0.35) - (geoEntropy * 1.1);
                 finalIdx = clamp(finalIdx, 5, 100);
+
+                // Computational Metrics
+                const temporalDensity = (GEO_PARSER.data.conflict + volatilityIndex * 12 + (100 - socialScore) * 0.8) / 3.0;
+                const realityGap = Math.abs(avgRegionStab - socialScore);
 
                 STATE.global.index = finalIdx;
                 STATE.global.volatility = volatilityIndex * 10;
                 STATE.global.netTraffic = GEO_PARSER.data.network.toFixed(1);
-                STATE.global.noosphere = socialScore.toFixed(0); // DIRECT LINK: Noosphere = Social Score
+                STATE.global.noosphere = socialScore.toFixed(0);
+                STATE.global.density = temporalDensity.toFixed(1);
+                STATE.global.gap = realityGap.toFixed(1);
 
                 // History
                 const now = Date.now();
@@ -642,7 +676,7 @@
 
             } catch (e) { console.warn(e); }
 
-            document.getElementById('update-tick').innerText = "LIVE";
+            document.getElementById('update-tick').innerText = "ОНЛАЙН";
             document.getElementById('calc-bar').style.width = "0%";
         }
 
@@ -652,8 +686,8 @@
             document.getElementById('v-vol').innerText = STATE.global.volatility.toFixed(1);
             document.getElementById('v-noo').innerText = STATE.global.noosphere;
 
-            // Random 'PSI' flux
-            document.getElementById('v-sol').innerText = (100 - STATE.global.index).toFixed(1);
+            // Temporal Density
+            document.getElementById('v-dens').innerText = STATE.global.density;
 
             const idx = STATE.global.index;
             let mood = "";
@@ -662,21 +696,31 @@
             // Use SOCIAL keywords for description
             const keywords = SOCIAL_PARSER.data.keywords.slice(0, 2).join(", ").toUpperCase();
 
-            if (idx > 80) { mood = "EUPHORIC"; desc = `Global sentiment positive. Trends: ${keywords}`; }
-            else if (idx > 60) { mood = "STABLE"; desc = `Society baseline nominal. Focus: ${keywords}`; }
-            else if (idx > 40) { mood = "ANXIOUS"; desc = `Social friction detected. Trends: ${keywords}`; }
-            else { mood = "PANIC"; desc = `High social entropy. Alert: ${keywords}`; }
+            // Ukrainian Narrative Generation
+            if (idx > 80) {
+                mood = "ГАРМОНІЯ";
+                desc = `Глобальна синхронізація станів. Ентропія мінімальна. Тренд: ${keywords}`;
+            } else if (idx > 60) {
+                mood = "СТАБІЛЬНІСТЬ";
+                desc = `Базові параметри в нормі. Локальні флуктуації. Фокус: ${keywords}`;
+            } else if (idx > 40) {
+                mood = "ТРИВОГА";
+                desc = `Виявлено соціальне тертя. Зростання ентропії. Тренд: ${keywords}`;
+            } else {
+                mood = "СИСТЕМНИЙ ШОК";
+                desc = `Критична десинхронізація реальності. Загроза каскаду. Увага: ${keywords}`;
+            }
 
             document.getElementById('main-desc').innerHTML = `<span style="color:#fff; font-weight:bold">${mood}</span> // ${desc}`;
             document.getElementById('main-idx').style.color = idx > 60 ? '#fff' : '#f04';
 
-            if (Math.random() > 0.7) log(`Social Sentiment Scan: ${STATE.global.noosphere}/100`);
+            if (Math.random() > 0.7) log(`Скан Соціуму: ${STATE.global.noosphere}/100`);
 
             const histVals = STATE.history.map(x => x.val);
             const avg = histVals.reduce((a, b) => a + b, 0) / histVals.length;
             document.getElementById('m-avg').innerText = avg.toFixed(1);
             document.getElementById('m-peak').innerText = "14:20 UTC";
-            document.getElementById('m-bio').innerText = (idx * 0.95).toFixed(0);
+            document.getElementById('m-bio').innerText = STATE.global.gap; // Reality Gap
         }
 
         // ============================================================================
