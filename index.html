@@ -316,6 +316,10 @@
                         id="v-vol">---</span><span class="m-unit">idx</span></div>
                 <div class="m-row"><span class="m-lbl">СОЦІАЛЬНА КОГЕРЕНТНІСТЬ</span> <span class="m-val"
                         id="v-noo">---</span><span class="m-unit">%</span></div>
+                <div class="m-row"><span class="m-lbl">БІОСФЕРНИЙ РЕЗОНАНС</span> <span class="m-val"
+                        id="v-bio-res">---</span><span class="m-unit">Hz</span></div>
+                <div class="m-row"><span class="m-lbl">ТЕХНОСФЕРНИЙ ТИСК</span> <span class="m-val"
+                        id="v-tech-press">---</span><span class="m-unit">atm</span></div>
                 <div class="m-row"><span class="m-lbl">ЩІЛЬНІСТЬ ЧАСУ</span> <span class="m-val"
                         id="v-dens">---</span><span class="m-unit">μ/s</span></div>
             </div>
@@ -437,7 +441,9 @@
                 index: 50,
                 netTraffic: 0,
                 volatility: 0,
-                noosphere: 0
+                noosphere: 0,
+                biosphere: 85,
+                technosphere: 40
             },
 
             cam: { rot: 0, pitch: 0.4 }
@@ -645,20 +651,29 @@
                     }
                 });
 
-                // 4. GLOBAL SUBJECTIVE INDEX (Aggregated from 11-Zone Matrix)
+                // 4. PLANETARY INDICES: BIOS & TECH
+                // Biosphere Resilience: Inverse to conflict/unrest + solar cycle proxy
+                const biosRes = 90 - (GEO_PARSER.data.unrest * 0.1) - (GEO_PARSER.data.conflict * 0.05) + (Math.random() * 5);
+                // Technospheric Pressure: Network traffic + Cyber activity + News saturation
+                const techPress = (GEO_PARSER.data.network * 0.3) + (GEO_PARSER.data.cyber * 0.2) + (volatilityIndex * 2);
+
+                // 5. GLOBAL SUBJECTIVE INDEX (Aggregated from 11-Zone Matrix + Planetary Modules)
                 const avgRegionStab = sumStability / ZONES_CFG.length;
 
-                let finalIdx = (avgRegionStab * 0.5) + (socialScore * 0.35) - (geoEntropy * 1.1);
+                // New Deep Formula: 40% Geopolitical + 30% Social + 20% Biosphere + 10% Reality Balance
+                let finalIdx = (avgRegionStab * 0.4) + (socialScore * 0.3) + (biosRes * 0.2) - (geoEntropy * 0.9) - (techPress * 0.05);
                 finalIdx = clamp(finalIdx, 5, 100);
 
                 // Computational Metrics
-                const temporalDensity = (GEO_PARSER.data.conflict + volatilityIndex * 12 + (100 - socialScore) * 0.8) / 3.0;
+                const temporalDensity = (GEO_PARSER.data.conflict + volatilityIndex * 12 + (100 - socialScore) * 0.8 + (techPress * 0.5)) / 3.5;
                 const realityGap = Math.abs(avgRegionStab - socialScore);
 
                 STATE.global.index = finalIdx;
                 STATE.global.volatility = volatilityIndex * 10;
                 STATE.global.netTraffic = GEO_PARSER.data.network.toFixed(1);
                 STATE.global.noosphere = socialScore.toFixed(0);
+                STATE.global.biosphere = biosRes.toFixed(1);
+                STATE.global.technosphere = techPress.toFixed(1);
                 STATE.global.density = temporalDensity.toFixed(1);
                 STATE.global.gap = realityGap.toFixed(1);
 
@@ -685,6 +700,8 @@
             document.getElementById('v-net').innerText = STATE.global.netTraffic;
             document.getElementById('v-vol').innerText = STATE.global.volatility.toFixed(1);
             document.getElementById('v-noo').innerText = STATE.global.noosphere;
+            document.getElementById('v-bio-res').innerText = STATE.global.biosphere;
+            document.getElementById('v-tech-press').innerText = STATE.global.technosphere;
 
             // Temporal Density
             document.getElementById('v-dens').innerText = STATE.global.density;
