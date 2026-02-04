@@ -163,6 +163,15 @@
             margin-left: 2px;
         }
 
+        .m-inf {
+            display: block;
+            font-size: 8px;
+            color: #446;
+            margin-top: 1px;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
         /* ZONES COMPACT */
         .zone-grid {
             display: grid;
@@ -329,18 +338,48 @@
                     <span>СЕНСОРИ ПЛАНЕТАРНОГО СТАНУ</span>
                     <span id="update-tick">ОНЛАЙН</span>
                 </div>
-                <div class="m-row"><span class="m-lbl">ЦИФРОВИЙ ПУЛЬС (NET)</span> <span class="m-val"
-                        id="v-net">---</span><span class="m-unit">Tbps</span></div>
-                <div class="m-row"><span class="m-lbl">ЕКОНОМІЧНА ТРИВОГА</span> <span class="m-val"
-                        id="v-vol">---</span><span class="m-unit">idx</span></div>
-                <div class="m-row"><span class="m-lbl">СОЦІАЛЬНА КОГЕРЕНТНІСТЬ</span> <span class="m-val"
-                        id="v-noo">---</span><span class="m-unit">%</span></div>
-                <div class="m-row"><span class="m-lbl">БІОСФЕРНИЙ РЕЗОНАНС</span> <span class="m-val"
-                        id="v-bio-res">---</span><span class="m-unit">Hz</span></div>
-                <div class="m-row"><span class="m-lbl">ТЕХНОСФЕРНИЙ ТИСК</span> <span class="m-val"
-                        id="v-tech-press">---</span><span class="m-unit">atm</span></div>
-                <div class="m-row"><span class="m-lbl">ЩІЛЬНІСТЬ ЧАСУ</span> <span class="m-val"
-                        id="v-dens">---</span><span class="m-unit">μ/s</span></div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">ЦИФРОВИЙ ПУЛЬС (NET)</span>
+                        <span class="m-inf">Швидкість глобального обміну даними (Tbps)</span>
+                    </div>
+                    <span class="m-val" id="v-net">---</span>
+                </div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">ЕКОНОМІЧНА ТРИВОГА</span>
+                        <span class="m-inf">Реакція системи на ринкову волатильність</span>
+                    </div>
+                    <span class="m-val" id="v-vol">---</span>
+                </div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">СОЦІАЛЬНА КОГЕРЕНТНІСТЬ</span>
+                        <span class="m-inf">Рівень синхронізації суспільних настроїв (%)</span>
+                    </div>
+                    <span class="m-val" id="v-noo">---</span>
+                </div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">БІОСФЕРНИЙ РЕЗОНАНС</span>
+                        <span class="m-inf">Стійкість до геомагнітних та сейсмо-атак</span>
+                    </div>
+                    <span class="m-val" id="v-bio-res">---</span>
+                </div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">ТЕХНОСФЕРНИЙ ТИСК</span>
+                        <span class="m-inf">Антропогенне навантаження на мережу</span>
+                    </div>
+                    <span class="m-val" id="v-tech-press">---</span>
+                </div>
+                <div class="m-row">
+                    <div style="flex:1">
+                        <span class="m-lbl">ЩІЛЬНІСТЬ ЧАСУ</span>
+                        <span class="m-inf">Кількість подій на одиницю сприйняття</span>
+                    </div>
+                    <span class="m-val" id="v-dens">---</span>
+                </div>
             </div>
 
             <div class="card" style="flex:1">
@@ -393,14 +432,17 @@
                     <div class="meta-item">
                         <span class="lbl">СЕРЕДНЄ (24г)</span>
                         <span class="val" id="m-avg">--</span>
+                        <span class="m-inf">Добовий тренд</span>
                     </div>
                     <div class="meta-item">
                         <span class="lbl">ПІК ЕНТРОПІЇ</span>
                         <span class="val" id="m-peak">--:--</span>
+                        <span class="m-inf">Макс. напруга</span>
                     </div>
-                    <div class="meta-item">
+                    <div class="meta-item" style="flex:1.5">
                         <span class="lbl">РОЗРИВ РЕАЛЬНОСТІ</span>
                         <span class="val" id="m-bio">--</span>
+                        <span class="m-inf">Дисонанс Фактів/Емоцій</span>
                     </div>
                 </div>
                 <div class="logs">
